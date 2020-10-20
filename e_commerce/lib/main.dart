@@ -1,6 +1,6 @@
-import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/routes.dart';
 import 'package:e_commerce/screens/splash/splash_screen.dart';
+import 'package:e_commerce/theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,14 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        fontFamily: 'Muli',
-        textTheme: TextTheme(
-            bodyText1: TextStyle(color: kTextColor),
-            bodyText2: TextStyle(color: kTextColor)),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: theme(),
       // home: SplashScreen(),
       // We use routeName so that we dont need to remember the name
       initialRoute: SplashScreen.routeName,

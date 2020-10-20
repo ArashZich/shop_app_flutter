@@ -1,13 +1,13 @@
-import 'package:e_commerce/components/default_button.dart';
-import 'package:e_commerce/constants.dart';
-import 'package:e_commerce/size_config.dart';
-
-import '../components/splash_content.dart';
+import 'package:e_commerce/screens/sign_in/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 
-class Body extends StatefulWidget {
-  Body({Key key}) : super(key: key);
+// This is the best practice
+import '../../../constants.dart';
+import '../../../size_config.dart';
+import '../components/splash_content.dart';
+import '../../../components/default_button.dart';
 
+class Body extends StatefulWidget {
   @override
   _BodyState createState() => _BodyState();
 }
@@ -35,46 +35,49 @@ class _BodyState extends State<Body> {
       child: SizedBox(
         width: double.infinity,
         child: Column(
-          children: [
+          children: <Widget>[
             Expanded(
               flex: 3,
               child: PageView.builder(
-                  onPageChanged: (value) {
-                    setState(() {
-                      currentPage = value;
-                    });
-                  },
-                  itemCount: splashData.length,
-                  itemBuilder: (context, index) => SplashContent(
-                        text: splashData[index]['text'],
-                        image: splashData[index]['image'],
-                      )),
+                onPageChanged: (value) {
+                  setState(() {
+                    currentPage = value;
+                  });
+                },
+                itemCount: splashData.length,
+                itemBuilder: (context, index) => SplashContent(
+                  image: splashData[index]["image"],
+                  text: splashData[index]['text'],
+                ),
+              ),
             ),
             Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: getProportionateScreenWidth(20)),
-                  child: Column(
-                    children: [
-                      Spacer(),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(
-                            splashData.length,
-                            (index) => buildDot(index: index),
-                          )),
-                      Spacer(
-                        flex: 3,
+              flex: 2,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: getProportionateScreenWidth(20)),
+                child: Column(
+                  children: <Widget>[
+                    Spacer(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                        splashData.length,
+                        (index) => buildDot(index: index),
                       ),
-                      DefaultButton(
-                        text: 'Continue',
-                        press: () {},
-                      ),
-                      Spacer(),
-                    ],
-                  ),
-                ))
+                    ),
+                    Spacer(flex: 3),
+                    DefaultButton(
+                      text: "Continue",
+                      press: () {
+                        Navigator.pushNamed(context, SignInScreen.routeName);
+                      },
+                    ),
+                    Spacer(),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -88,8 +91,9 @@ class _BodyState extends State<Body> {
       height: 6,
       width: currentPage == index ? 20 : 6,
       decoration: BoxDecoration(
-          color: currentPage == index ? kPrimaryColor : Color(0xFFD8D8D8),
-          borderRadius: BorderRadius.circular(3)),
+        color: currentPage == index ? kPrimaryColor : Color(0xFFD8D8D8),
+        borderRadius: BorderRadius.circular(3),
+      ),
     );
   }
 }
